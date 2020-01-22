@@ -24,13 +24,13 @@ class EtlAds:
         ad_manager_client = ad_manager.AdManagerClient.LoadFromStorage(STRING.GOOGLEADS_YAML_FILE)
         network_service = ad_manager_client.GetService('NetworkService')
         current_network = network_service.getCurrentNetwork()
+
         root_ad_unit_id = (
             network_service.getCurrentNetwork()['effectiveRootAdUnitId'])
         print(root_ad_unit_id)
+
         # Create statement object to filter for an order.
         statement = (ad_manager.StatementBuilder(version='v201905')
-                     .Where('AD_UNIT_ID = :AdUnitId')
-                     .WithBindVariable('AdUnitId', int(root_ad_unit_id))
                      .Limit(None)  # No limit or offset for reports
                      .Offset(None))
 
@@ -42,8 +42,8 @@ class EtlAds:
         # Create report job.
         report_job = {
             'reportQuery': {
-                'dimensions': ['DATE'],
-                'adUnitView': 'HIERARCHICAL',
+                'dimensions': ['DATE', 'AD_UNIT_NAME'],
+                'adUnitView': 'TOP_LEVEL',
                 'columns': ['AD_SERVER_IMPRESSIONS'],
                 'dateRangeType': 'LAST_3_MONTHS',
                 'statement': statement.ToStatement()
