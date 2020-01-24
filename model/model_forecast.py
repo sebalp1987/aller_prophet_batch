@@ -20,11 +20,9 @@ class AlllerProphet:
     def forecast(self, df):
 
         for tgt in df.drop(['Ad unit', 'date'], axis=1).columns:
-            print(tgt)
             df_ = df[['date', 'Ad unit', tgt]]
             df_tgt = pd.DataFrame()
             for ad_unit in df_['Ad unit'].unique():
-                print(ad_unit)
                 df_i = df_[df_['Ad unit'] == ad_unit]
 
                 # Decompose
@@ -65,5 +63,3 @@ class AlllerProphet:
                 df_tgt = df_tgt.append(df_i)
 
             self._bucket.blob('proc_' + tgt + '.csv').upload_from_string(df_tgt.to_csv(), 'text/csv')
-
-AlllerProphet()

@@ -30,7 +30,6 @@ class EtlAds:
         blob = self._bucket.blob(STRING.input_db)
         blob.download_to_filename(STRING.input_db)
         df_db = pd.read_csv(STRING.input_db, sep=',', index_col=0)
-        print(df_db)
         df_db['date'] = pd.to_datetime(df_db['date'], format="%Y-%m-%d")
         ad_manager_client = ad_manager.AdManagerClient.LoadFromStorage(STRING.GOOGLEADS_YAML_FILE)
 
