@@ -1,0 +1,4 @@
+ad_manager:
+  application_name: Aller Data Science
+  network_code: 8578
+  path_to_private_key_file: .\AllerDataScience-5f0f80d3f8e4.json
