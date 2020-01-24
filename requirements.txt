@@ -4,5 +4,4 @@ statsmodels==0.10.1
 fbprophet==0.5
 numpy==1.16.5
 googleads==22.0.0
-
 google-cloud-storage==1.25.0
